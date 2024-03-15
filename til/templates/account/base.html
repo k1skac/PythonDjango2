@@ -1,0 +1,10 @@
+{% extends "base.html" %} 
+{% block body %} 
+{% if messages %}
+Messages:
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+{% endif %}
+ {% block content %}{% endblock %} 
+ {% endblock %}
