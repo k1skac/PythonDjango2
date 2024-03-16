@@ -39,9 +39,7 @@ $(document).on("click", ".js-toggle-modal", function(e){
     if(!text.length || !title.length){
         return false;
     }
-    
-   
-    
+        
     const $btn = $(this)
 
     $btn.prop("disabled", true).text("Posting!")
@@ -62,6 +60,29 @@ $(document).on("click", ".js-toggle-modal", function(e){
         error: (error) => {
             console.warn(error)
             $btn.prop("disabled", false).text("Error");
+        }
+    });
+})
+$(document).on("click", ".js-follow", function(e){
+    e.preventDefault();
+    let action = $(this).attr("data-action");
+    $.ajax({
+        type: 'POST',
+        url: $(this).data("url"),
+        data: {
+            action: action,
+            username: $(this).data("username"),
+        },
+        success: (data) => {
+           $(".js-follow-text").text(data.wording);
+           if(action == "follow"){
+            $(".js-follow").attr('data-action', "unfollow")
+           } else {
+            $(".js-follow").attr('data-action', "follow")
+           }
+        },
+        error: (error) => {
+            console.warn(error)
         }
     });
 })
