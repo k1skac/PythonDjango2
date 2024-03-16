@@ -22,7 +22,6 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     context_object_name = 'post'
 
-
 class CreateNewPost(CreateView):
     template_name = "feed/create.html"
     model = Post
@@ -38,3 +37,19 @@ class CreateNewPost(CreateView):
         obj.author = self.request.user
         obj.save()
         return super().form_valid(form)
+    
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        post = Post.objects.create(
+            text = request.POST.get("text"),
+            title = request.POST.get("title"),
+            author = request.user
+        )
+        return render(
+            request,
+            "includes/post.html",
+            {
+                "post": post,
+                "show_detail_link": True
+            },
+           content_type="application/html" 
+        )

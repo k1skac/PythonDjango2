@@ -3,8 +3,11 @@
 {% block title %}Hello on my webpage{% endblock %}
 
 {% block body %}
-    {% for post in posts%}
-        {% include "includes/post.html" with post=post show_detail_link=True %}
-            <hr>
-    {% endfor %}
+    <div id="post-container">
+        {% for post in posts%}
+            {% include "includes/post.html" with post=post show_detail_link=True %}
+                <hr>
+        {% endfor %}
+    </div>
+   
 {% endblock %}
