@@ -1,10 +1,9 @@
-{% extends "base.html" %}
+{% extends 'base.html'%}
 {% load thumbnail %}
 
-{% block title %}Hello on my webpage{% endblock %}
+{% block title %}{{post.text}} by {{post.author.username}}{% endblock %}
 
 {% block body %}
- {% for post in posts%}
 <!-- component -->
         <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md">
             <div class="flex justify-between items-center">
@@ -16,7 +15,7 @@
                 <p class="mt-2 text-gray-600"> {{post.text}}</p>
             </div>
             <div class="flex justify-between items-center mt-4">
-                <a class="text-blue-600 hover:underline" href="{% url 'feed:detail' post.id %}">Read more</a>
+                <a class="text-blue-600 hover:underline" href="/">Go Back!</a>
                 <div>
                     <a class="flex items-center" href="#">
                         {% thumbnail post.author.profile.image "373x372" crop="center" as im %}
@@ -28,5 +27,4 @@
             </div>
         </div>
         <hr>
-    {% endfor %}
 {% endblock %}
